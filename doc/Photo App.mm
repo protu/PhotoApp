@@ -1,9 +1,9 @@
-<map version="freeplane 1.6.0">
+<map version="freeplane 1.7.0">
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
-<node TEXT="Photo App" FOLDED="false" ID="ID_1987788649" CREATED="1574018171102" MODIFIED="1574027758836" STYLE="oval">
+<node TEXT="Photo App" FOLDED="false" ID="ID_1987788649" CREATED="1574018171102" MODIFIED="1574074139163" STYLE="oval">
 <font SIZE="18"/>
 <hook NAME="MapStyle" zoom="1.0389693">
-    <properties edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" fit_to_viewport="false" show_icon_for_attributes="true"/>
+    <properties show_icon_for_attributes="true" fit_to_viewport="false" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_note_icons="true"/>
 
 <map_styles>
 <stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24.0 pt">
@@ -63,7 +63,7 @@
 </stylenode>
 </map_styles>
 </hook>
-<hook NAME="AutomaticEdgeColor" COUNTER="11" RULE="ON_BRANCH_CREATION"/>
+<hook NAME="AutomaticEdgeColor" COUNTER="12" RULE="ON_BRANCH_CREATION"/>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <node TEXT="Users" LOCALIZED_STYLE_REF="AutomaticLayout.level,1" POSITION="right" ID="ID_991361973" CREATED="1574018439925" MODIFIED="1574027644479" HGAP_QUANTITY="67.24999841302639 pt" VSHIFT_QUANTITY="153.74999541789305 pt">
 <edge COLOR="#00ff00"/>
@@ -153,6 +153,56 @@
 <node TEXT="logging" POSITION="right" ID="ID_743407041" CREATED="1574027706305" MODIFIED="1574027746491" HGAP_QUANTITY="50.74999890476468 pt" VSHIFT_QUANTITY="-170.24999492615478 pt">
 <edge COLOR="#7c7c00"/>
 <node TEXT="user actions" ID="ID_263047957" CREATED="1574027711526" MODIFIED="1574027714687"/>
+</node>
+<node TEXT="web pages" POSITION="left" ID="ID_1956189449" CREATED="1574073713681" MODIFIED="1574074139163" VSHIFT_QUANTITY="11.999999642372142 pt">
+<edge COLOR="#ff0000"/>
+<node TEXT="login" ID="ID_1067270174" CREATED="1574073746012" MODIFIED="1574074196550"><richcontent TYPE="NOTE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      Anonymouse login page with preview, login area and user creation
+    </p>
+  </body>
+</html>
+
+</richcontent>
+</node>
+<node TEXT="logout" ID="ID_96716470" CREATED="1574073752045" MODIFIED="1574073753721"/>
+<node TEXT="browse" ID="ID_1662186948" CREATED="1574073754787" MODIFIED="1574074215853" HGAP_QUANTITY="10.250000111758705 pt" VSHIFT_QUANTITY="7.499999776482587 pt">
+<icon BUILTIN="gohome"/>
+<richcontent TYPE="NOTE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      home page after login
+    </p>
+  </body>
+</html>
+
+</richcontent>
+<node TEXT="upload" ID="ID_802672682" CREATED="1574073801701" MODIFIED="1574073804076"/>
+<node TEXT="download" ID="ID_1481107018" CREATED="1574073807447" MODIFIED="1574073815942"/>
+<node TEXT="edit" ID="ID_217523270" CREATED="1574073894244" MODIFIED="1574073901777">
+<icon BUILTIN="pencil"/>
+</node>
+<node TEXT="show" ID="ID_1438980127" CREATED="1574073909852" MODIFIED="1574073915079">
+<icon BUILTIN="image"/>
+</node>
+</node>
+<node TEXT="search" ID="ID_1808538268" CREATED="1574073770428" MODIFIED="1574073873982">
+<icon BUILTIN="xmag"/>
+</node>
+<node TEXT="admin" ID="ID_1514223407" CREATED="1574073926420" MODIFIED="1574073931439">
+<icon BUILTIN="executable"/>
+</node>
 </node>
 </node>
 </map>
