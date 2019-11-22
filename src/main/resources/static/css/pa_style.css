@@ -1,12 +1,17 @@
 @charset "UTF-8";
 
 #logo-title img{
-    width: 100px;
+    width: auto;
     height: 100px;
 }
 
 #logo-title h1{
     display: inline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 .validation-error {
