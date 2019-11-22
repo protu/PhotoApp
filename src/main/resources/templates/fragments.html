@@ -13,10 +13,17 @@
 </head>
 
 <div th:fragment="header" id="logo-title">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                <img class="float-left" th:src="@{/images/logo.png}">
+    <div class="row">
+        <div class="col-sm float-left">
+            <img th:src="@{/images/logo.png}">
+        </div>
+        <div class="col-sm align-content-center"><h1>Photo App</h1></div>
+        <div class="col-sm-3">
+            <div class="float-right" sec:authorize="isAuthenticated()">
+                <form method="POST" th:action="@{/logout}">
+                    Ulogirani ste kao <span sec:authentication="name">Korisnik</span>.
+                    <input type="submit" value="Logout" class="btn border ml-2"/>
+                </form>
             </div>
         </div>
     </div>
