@@ -19,13 +19,13 @@ values ('Sport car', 'pict/pict003.jpg', 'Ferrari 348', 'admin');
 insert into pictures (name, path, description, username)
 values ('Puppy', 'pict/pict004.jpg', 'Puppy', 'admin');
 insert into pictures (name, path, description, username)
-values ('Fruit', 'pict/pict005.jpg', 'Fruit baske', 'admin');
+values ('Fruit', 'pict/pict005.jpg', 'Fruit basket', 'admin');
 insert into pictures (name, path, description, username)
 values ('Marina', 'pict/pict006.jpg', 'Boats in marina', 'admin');
 insert into pictures (name, path, description, username)
 values ('Fox', 'pict/pict007.jpg', 'Fox in the grass', 'admin');
 insert into pictures (name, path, description, username)
-values ('Snow', 'pict/pict008.jpg', 'Snow mouintain', 'admin');
+values ('Snow', 'pict/pict008.jpg', 'Snow mountain', 'admin');
 insert into pictures (name, path, description, username)
 values ('City', 'pict/pict009.jpg', 'City line', 'admin');
 insert into pictures (name, path, description, username)

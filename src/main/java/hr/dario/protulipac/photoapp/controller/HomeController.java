@@ -27,7 +27,7 @@ public class HomeController {
     public String home(Model model) {
         List<Picture> pictures = new ArrayList<>();
         pictureRepo.findAll().forEach(pictures::add);
-
+        model.addAttribute("pictures", pictures);
         return ("home");
     }
 
