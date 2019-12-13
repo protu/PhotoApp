@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
 <body>
-<h1>Spring Boot File Upload Example</h1>
-<hr/>
-<h4>Upload Single File:</h4>
-<form method="POST" th:action="@{/upload}" enctype="multipart/form-data">
-    <input type="file" name="file"/> <br/><br/>
-    <button type="submit">Submit</button>
-</form>
-<hr/>
-<div th:if="${message}">
-    <h2 th:text="${message}"/>
-</div>
+<div class="container-fluid">
+    <div th:replace="fragments :: header"></div>
+    <main role="main">
+        <h3>New picture upload</h3>
+        <hr/>
+        <form method="POST" th:object="${picture}" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <input id="file" type="file" name="file"/> <br/><br/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label th:for="${picture.name}">Name: </label>
+                    <input type="text" th:field="${picture.name}" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label th:for="${picture.description}">Description: </label>
+                    <input type="text" th:field="${picture.description}" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                    <input type="submit" value="Add picture" class="btn btn-primary"/>
+                </div>
+            </div>
+        </form>
+        <hr/>
+        <div th:if="${message}">
+            <h2 th:text="${message}"/>
+        </div>
+
 </body>
 </html>

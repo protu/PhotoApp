@@ -17,15 +17,16 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class FileService {
+    private final ResourceLoader resourceLoader;
 
     @Autowired
-    ResourceLoader resourceLoader;
-
-    public String uploadDir;
+    public FileService(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
 
     public void uploadFile(MultipartFile file) throws IOException {
 
-        uploadDir = resourceLoader.getResource("classpath:/static/pict/").getFile().getPath();
+        String uploadDir = resourceLoader.getResource("classpath:/static/pict/").getFile().getPath();
         Path copyLocation = null;
         try {
             copyLocation = Paths.get(uploadDir + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
@@ -33,7 +34,7 @@ public class FileService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new FileStorageException("Could not store file " + copyLocation.toString() + " : " + file.getOriginalFilename() + ". Please try again!");
+            throw new FileStorageException("Could not store file " + file.getOriginalFilename() + ". Please try again!");
         }
     }
 }
