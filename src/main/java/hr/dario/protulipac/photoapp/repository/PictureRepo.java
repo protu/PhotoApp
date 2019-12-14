@@ -35,6 +35,10 @@ public class PictureRepo {
         return pictureInsertr.executeAndReturnKey(values).longValue();
     }
 
+    public Picture findPicture(long id) {
+        return jdbc.queryForObject("select id, name, path, description, username from pictures where id = ?", this::mapRowToPictures, id);
+    }
+
     public Picture save(Picture picture) {
         picture.setId(savePictureDetails(picture));
         return picture;

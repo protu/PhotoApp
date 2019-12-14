@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments :: header"></div>
+    <main role="main">
+        <h3>Edit picture</h3>
+        <hr/>
+        <img th:src="${picture.path}" th:alt="${picture.name}">
+        <form method="POST" th:object="${picture}" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label th:for="${picture.name}">Name: </label>
+                    <input type="text" th:field="${picture.name}" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label th:for="${picture.description}">Description: </label>
+                    <input type="text" th:field="${picture.description}" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                    <input type="submit" value="Add picture" class="btn btn-primary"/>
+                </div>
+            </div>
+        </form>
+        <hr/>
+    </main>
+</div>
+</body>
+</html>

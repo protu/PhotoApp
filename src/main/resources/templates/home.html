@@ -29,7 +29,11 @@
                                         <button type="button" class="btn btn-sm btn-outline-secondary"
                                                 data-toggle="modal" th:data-target="${'#Modal' + picture.id}">View
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        <form action="/edit" method="post">
+                                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                                            <input type="hidden" name="id" th:value="${picture.id}"/>
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        </form>
                                     </div>
                                     <small class="text-muted" th:text="${picture.username}">Author</small>
                                 </div>
