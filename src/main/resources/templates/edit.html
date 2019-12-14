@@ -7,7 +7,8 @@
     <main role="main">
         <h3>Edit picture</h3>
         <hr/>
-        <img th:src="${picture.path}" th:alt="${picture.name}">
+        <img th:src="${picture.path}" th:alt="${picture.name}"
+             style="object-fit: cover; height: 400px; overflow: hidden">
         <form method="POST" th:object="${picture}" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="col-md-4 mb-3">
@@ -21,11 +22,19 @@
                     <input type="text" th:field="${picture.description}" class="form-control"/>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                    <input type="submit" value="Add picture" class="btn btn-primary"/>
+            <div th:unless="${message}">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                        <input type="hidden" name="id" th:value="${picture.id}"/>
+                        <input type="hidden" name="change" value="1"/>
+                        <input type="submit" value="Edit picture" class="btn btn-primary"/>
+                    </div>
                 </div>
+            </div>
+            <div th:if="${message}">
+                <p th:text="${message}">Picture changed</p>
+                <a class="btn btn-primary" href="/">Go back</a>
             </div>
         </form>
         <hr/>

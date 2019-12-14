@@ -17,8 +17,6 @@ values ('MDF', 'pict/pict002.jpg', 'Main distribution frame', 'admin');
 insert into pictures (name, path, description, username)
 values ('Sport car', 'pict/pict003.jpg', 'Ferrari 348', 'admin');
 insert into pictures (name, path, description, username)
-values ('Puppy', 'pict/pict004.jpg', 'Puppy', 'admin');
-insert into pictures (name, path, description, username)
 values ('Fruit', 'pict/pict005.jpg', 'Fruit basket', 'admin');
 insert into pictures (name, path, description, username)
 values ('Marina', 'pict/pict006.jpg', 'Boats in marina', 'admin');
@@ -27,14 +25,16 @@ values ('Fox', 'pict/pict007.jpg', 'Fox in the grass', 'admin');
 insert into pictures (name, path, description, username)
 values ('Snow', 'pict/pict008.jpg', 'Snow mountain', 'admin');
 insert into pictures (name, path, description, username)
+values ('Puppy', 'pict/pict004.jpg', 'Puppy', 'admin');
+insert into pictures (name, path, description, username)
 values ('City', 'pict/pict009.jpg', 'City line', 'admin');
 insert into pictures (name, path, description, username)
 values ('Forest', 'pict/pict010.jpg', 'Burned forest', 'admin');
 
-insert into hashtags(name)
-values ('animals');
-
-insert into hash2pict(picture, hashtag)
-values (4, 1);
-insert into hash2pict(picture, hashtag)
-values (7, 1);
+-- insert into hashtags(name)
+-- values ('animals');
+--
+-- insert into hash2pict(picture, hashtag)
+-- values (4, 1);
+-- insert into hash2pict(picture, hashtag)
+-- values (7, 1);

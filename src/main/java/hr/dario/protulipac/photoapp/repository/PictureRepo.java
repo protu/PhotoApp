@@ -16,6 +16,7 @@ public class PictureRepo {
     private final JdbcTemplate jdbc;
     private final SimpleJdbcInsert pictureInsertr;
 
+
     public PictureRepo(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
         this.pictureInsertr = new SimpleJdbcInsert(jdbc).withTableName("pictures").usingGeneratedKeyColumns("id");
@@ -23,6 +24,10 @@ public class PictureRepo {
 
     public Iterable<Picture> findAll() {
         return jdbc.query("select id, name, path, description, username from pictures", this::mapRowToPictures);
+    }
+
+    public void deletePicture(long id) {
+        jdbc.execute("delete from pictures where id=" + String.valueOf(id));
     }
 
     private long savePictureDetails(Picture picture) {
@@ -43,6 +48,8 @@ public class PictureRepo {
         picture.setId(savePictureDetails(picture));
         return picture;
     }
+
+
 
     private Picture mapRowToPictures(ResultSet  resultSet, int rowNum) throws SQLException {
         Picture picture = new Picture();

@@ -3,6 +3,8 @@ package hr.dario.protulipac.photoapp.controller;
 import hr.dario.protulipac.photoapp.domain.Picture;
 import hr.dario.protulipac.photoapp.repository.PictureRepo;
 import hr.dario.protulipac.photoapp.service.FileService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +23,8 @@ import java.util.List;
 @Controller
 
 public class FileController {
+
+    private Logger log = LoggerFactory.getLogger(FileController.class);
 
     private final FileService fileService;
     private final PictureRepo pictureRepo;
@@ -44,6 +48,7 @@ public class FileController {
         picture.setPath("pict/" + file.getOriginalFilename());
         picture.setUsername(username);
         pictureRepo.save(picture);
+        log.info("You have successfully uploaded " + picture.getName() + " picture!");
         List<Picture> pictures = new ArrayList<>();
         pictureRepo.findAll().forEach(pictures::add);
         model.addAttribute("pictures", pictures);
