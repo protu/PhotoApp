@@ -1,6 +1,7 @@
 package hr.dario.protulipac.photoapp.repository;
 
 import hr.dario.protulipac.photoapp.domain.Picture;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -11,55 +12,5 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class PictureRepo {
-
-    private final JdbcTemplate jdbc;
-    private final SimpleJdbcInsert pictureInsertr;
-
-
-    public PictureRepo(JdbcTemplate jdbc) {
-        this.jdbc = jdbc;
-        this.pictureInsertr = new SimpleJdbcInsert(jdbc).withTableName("pictures").usingGeneratedKeyColumns("id");
-    }
-
-    public Iterable<Picture> findAll() {
-        return jdbc.query("select id, name, path, description, username from pictures", this::mapRowToPictures);
-    }
-
-    public void deletePicture(long id) {
-        jdbc.execute("delete from pictures where id=" + String.valueOf(id));
-    }
-
-    private long savePictureDetails(Picture picture) {
-        Map<String, Object> values = new HashMap<>();
-        values.put("name", picture.getName());
-        values.put("description", picture.getDescription());
-        values.put("path", picture.getPath());
-        values.put("username", picture.getUsername());
-
-        return pictureInsertr.executeAndReturnKey(values).longValue();
-    }
-
-    public Picture findPicture(long id) {
-        return jdbc.queryForObject("select id, name, path, description, username from pictures where id = ?", this::mapRowToPictures, id);
-    }
-
-    public Picture save(Picture picture) {
-        picture.setId(savePictureDetails(picture));
-        return picture;
-    }
-
-
-
-    private Picture mapRowToPictures(ResultSet  resultSet, int rowNum) throws SQLException {
-        Picture picture = new Picture();
-
-        picture.setId(resultSet.getLong("id"));
-        picture.setName(resultSet.getNString("name"));
-        picture.setPath(resultSet.getNString("path"));
-        picture.setDescription(resultSet.getNString("description"));
-        picture.setUsername(resultSet.getNString("username"));
-
-        return picture;
-    }
+public interface PictureRepo extends CrudRepository<Picture, Long> {
 }

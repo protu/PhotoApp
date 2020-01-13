@@ -30,12 +30,11 @@ public class EditController {
 
     @PostMapping("/edit")
     public String editPicture(@RequestParam("id") long id, @RequestParam(value = "change", required = false) Integer change, Model model, Picture pictnew) {
-        Picture picture = pictureRepo.findPicture(id);
+        Picture picture = pictureRepo.findById(id).get();
         model.addAttribute("picture", picture);
         if (change != null && change == 1) {
             picture.setDescription(pictnew.getDescription());
             picture.setName(pictnew.getName());
-            pictureRepo.deletePicture(id);
             pictureRepo.save(picture);
             model.addAttribute("message", "Picture" + picture.getName() + " is changed");
             log.info("Picture" + picture.getName() + " is changed");
