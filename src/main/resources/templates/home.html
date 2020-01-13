@@ -37,6 +37,14 @@
                                                 </button>
                                             </div>
                                         </form>
+                                        <form action="/delete" method="post">
+                                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                                            <input type="hidden" name="id" th:value="${picture.id}"/>
+                                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                                <button type="submit" class="btn btn-sm btn-outline-secondary">Delete
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                     <small class="text-muted" th:text="${picture.username}">Author</small>
                                 </div>
