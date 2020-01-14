@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout")
                 .and()
                 // ignore CSRF protection and allow IFRAME for h2 console
-                .csrf().ignoringAntMatchers("/h2-console/**")
+                .csrf().ignoringAntMatchers("/h2-console/**", "/api/**", "/login", "/logout")
                 .and()
                 .headers().frameOptions().sameOrigin();
     }
