@@ -4,13 +4,12 @@ import hr.dario.protulipac.photoapp.domain.Picture;
 import hr.dario.protulipac.photoapp.repository.PictureRepo;
 import hr.dario.protulipac.photoapp.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -35,6 +34,30 @@ public class PhotoRestController {
         String username = SecurityUtils.getUsername();
         Optional<Picture> pictureOptional = pictureRepo.findByIdAndUsername(id, username);
         return pictureOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        boolean exists = SecurityUtils.isAdmin() ? pictureRepo.existsById(id) : pictureRepo.existsByIdAndUsername(id, SecurityUtils.getUsername());
+        if(exists){
+            pictureRepo.deleteById(id);
+        }
+    }
+
+    @PutMapping(value = "/{id}", consumes = "application/json")
+    public ResponseEntity<Picture> update(@PathVariable Long id, @Valid @RequestBody Picture updtPicture) {
+        Optional<Picture> picture = SecurityUtils.isAdmin() ? pictureRepo.findById(id) : pictureRepo.findByIdAndUsername(id, SecurityUtils.getUsername());
+
+        picture.ifPresent(value -> {
+            value.setName(updtPicture.getName());
+            value.setDescription(updtPicture.getDescription());
+            value.setPath(updtPicture.getPath());
+
+            pictureRepo.save(value);
+        });
+
+        return picture.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }

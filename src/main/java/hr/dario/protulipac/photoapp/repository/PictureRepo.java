@@ -13,4 +13,6 @@ public interface PictureRepo extends CrudRepository<Picture, Long> {
     Iterable<Picture> findAllByUsername(String username);
 
     Optional<Picture> findByIdAndUsername(Long id, String username);
+
+    Boolean existsByIdAndUsername(Long id, String username);
 }
