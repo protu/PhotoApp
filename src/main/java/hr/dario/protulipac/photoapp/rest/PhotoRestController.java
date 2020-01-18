@@ -3,13 +3,20 @@ package hr.dario.protulipac.photoapp.rest;
 import hr.dario.protulipac.photoapp.domain.Picture;
 import hr.dario.protulipac.photoapp.repository.PictureRepo;
 import hr.dario.protulipac.photoapp.security.SecurityUtils;
+import hr.dario.protulipac.photoapp.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -18,10 +25,12 @@ import java.util.Optional;
 public class PhotoRestController {
 
     private final PictureRepo pictureRepo;
+    private final FileService fileService;
 
     @Autowired
-    public PhotoRestController(PictureRepo pictureRepo) {
+    public PhotoRestController(FileService fileService, PictureRepo pictureRepo) {
         this.pictureRepo = pictureRepo;
+        this.fileService = fileService;
     }
 
     @GetMapping
@@ -38,9 +47,9 @@ public class PhotoRestController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         boolean exists = SecurityUtils.isAdmin() ? pictureRepo.existsById(id) : pictureRepo.existsByIdAndUsername(id, SecurityUtils.getUsername());
-        if(exists){
+        if (exists) {
             pictureRepo.deleteById(id);
         }
     }
@@ -53,6 +62,7 @@ public class PhotoRestController {
             value.setName(updtPicture.getName());
             value.setDescription(updtPicture.getDescription());
             value.setPath(updtPicture.getPath());
+            value.setUsername(SecurityUtils.getUsername());
 
             pictureRepo.save(value);
         });
@@ -60,4 +70,19 @@ public class PhotoRestController {
         return picture.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value = "/new", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Picture addNeWWithDesc(@RequestParam(value = "file") MultipartFile file, @RequestPart(value = "picture") Picture picture) throws IOException {
+        picture.setUsername(SecurityUtils.getUsername());
+        picture.setPath(File.separator + "pict" + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
+        fileService.uploadFile(file);
+        return pictureRepo.save(picture);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(consumes = {"application/json"})
+    public Picture addNew(@Valid @RequestBody Picture picture) {
+        picture.setUsername(SecurityUtils.getUsername());
+        return pictureRepo.save(picture);
+    }
 }
