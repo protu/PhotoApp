@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.io.File;
@@ -47,10 +49,13 @@ public class PhotoRestController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) throws HttpClientErrorException.NotFound {
         boolean exists = SecurityUtils.isAdmin() ? pictureRepo.existsById(id) : pictureRepo.existsByIdAndUsername(id, SecurityUtils.getUsername());
         if (exists) {
             pictureRepo.deleteById(id);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such ID");
         }
     }
 
@@ -72,7 +77,7 @@ public class PhotoRestController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/new", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Picture addNeWWithDesc(@RequestParam(value = "file") MultipartFile file, @RequestPart(value = "picture") Picture picture) throws IOException {
+    public Picture addNeWWithDesc(@RequestParam(value = "file") MultipartFile file, @Valid @RequestPart(value = "picture") Picture picture) throws IOException {
         picture.setUsername(SecurityUtils.getUsername());
         picture.setPath(File.separator + "pict" + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
         fileService.uploadFile(file);

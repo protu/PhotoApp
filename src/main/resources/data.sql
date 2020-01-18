@@ -29,7 +29,7 @@ values ('Puppy', 'pict/pict004.jpg', 'Puppy', 'admin');
 insert into pictures (name, path, description, username)
 values ('City', 'pict/pict009.jpg', 'City line', 'admin');
 insert into pictures (name, path, description, username)
-values ('Forest', 'pict/pict010.jpg', 'Burned forest', 'admin');
+values ('Forest', 'pict/pict010.jpg', 'Burned forest', 'luser');
 
 -- insert into hashtags(name)
 -- values ('animals');
