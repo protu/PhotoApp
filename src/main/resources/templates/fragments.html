@@ -5,7 +5,7 @@
 <body>
 
 <head th:fragment="head">
-    <title>PhotoApp</title>
+    <title th:text="#{msg.head_title}"></title>
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon.png}"/>
     <meta charset="UTF-8"></meta>
     <link th:href="@{/css/pa_style.css}" rel="stylesheet"/>
@@ -13,6 +13,7 @@
     <script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
 </head>
 
 <div th:fragment="header" id="logo-title">
@@ -22,21 +23,26 @@
                 <img th:src="@{/images/logo.png}">
             </a>
         </div>
-        <div class="col-sm align-content-center"><h1>Photo App</h1></div>
+        <div class="col-sm align-content-center"><h1 th:text="#{msg.title}"></h1></div>
         <div class="col-sm-3">
             <div class="float-right" sec:authorize="isAuthenticated()">
                 <form method="POST" th:action="@{/logout}">
-                    Ulogirani ste kao <span sec:authentication="name">Korisnik</span>.
+                    <span th:text="#{msg.you_are_logged_in_as} "></span>
+                    <span sec:authentication="name"></span>.
                     <input type="submit" value="Logout" class="btn border ml-2"/>
                 </form>
+            </div>
+            <div>
+                <span th:text="#{msg.lang_current}"></span>:
+                <select id="locales">
+                    <option value="hr" th:selected="${#locale.language == 'hr'}" th:text="#{msg.lang_hr}"></option>
+                    <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{msg.lang_en}"></option>
+                </select>
             </div>
         </div>
     </div>
 </div>
 
-<div th:fragment="js">
-    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
-</div>
 
 </body>
 

@@ -5,20 +5,20 @@
 <div class="container-fluid">
     <div th:replace="fragments :: header"></div>
     <main role="main">
-        <h3>Edit picture</h3>
+        <h3 th:text="#{msg.edit_title}"></h3>
         <hr/>
         <img th:src="${picture.path}" th:alt="${picture.name}"
              style="object-fit: cover; height: 400px; overflow: hidden">
         <form method="POST" th:object="${picture}" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <label th:for="${picture.name}">Name: </label>
+                    <label th:for="${picture.name}" th:text="#{msg.name} +':'" ></label>
                     <input type="text" th:field="${picture.name}" class="form-control"/>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <label th:for="${picture.description}">Description: </label>
+                    <label th:for="${picture.description}" th:text="#{msg.description}+':'"> </label>
                     <input type="text" th:field="${picture.description}" class="form-control"/>
                 </div>
             </div>
@@ -33,8 +33,8 @@
                 </div>
             </div>
             <div th:if="${message}">
-                <p th:text="${message}">Picture changed</p>
-                <a class="btn btn-primary" href="/">Go back</a>
+                <p th:text="${message}"></p>
+                <a class="btn btn-primary" href="/" th:text="#{msg.go_back}"></a>
             </div>
         </form>
         <hr/>

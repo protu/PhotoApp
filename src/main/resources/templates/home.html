@@ -9,11 +9,12 @@
             <p th:text="${message}"></p>
         </div>
 
+
         <div class="container">
             <div class="album py-3">
                 <div class="row">
                     <div class="col-md mt-0 mb-3">
-                        <a class="btn btn-primary" href="/upload">Add new picture</a>
+                        <a class="btn btn-primary" href="/upload" th:text="#{msg.add_new_picture}"></a>
                     </div>
                 </div>
 
@@ -23,17 +24,19 @@
                             <img th:src="${picture.path}" th:alt="${picture.name}"
                                  style="object-fit: cover; height: 250px; overflow: hidden">
                             <div class="card-body">
-                                <p class="card-text" th:text="${picture.description}">Picture description</p>
+                                <p class="card-text" th:text="${picture.description}"></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary"
-                                                data-toggle="modal" th:data-target="${'#Modal' + picture.id}">View
+                                                data-toggle="modal" th:data-target="${'#Modal' + picture.id}"
+                                                th:text="#{msg.view}">
                                         </button>
                                         <form action="/edit" method="post">
                                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                                             <input type="hidden" name="id" th:value="${picture.id}"/>
                                             <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                                <button type="submit" class="btn btn-sm btn-outline-secondary">Edit
+                                                <button type="submit" class="btn btn-sm btn-outline-secondary"
+                                                        th:text="#{msg.edit}">
                                                 </button>
                                             </div>
                                         </form>
@@ -41,12 +44,13 @@
                                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                                             <input type="hidden" name="id" th:value="${picture.id}"/>
                                             <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                                <button type="submit" class="btn btn-sm btn-outline-secondary">Delete
+                                                <button type="submit" class="btn btn-sm btn-outline-secondary"
+                                                        th:text="#{msg.delete}">
                                                 </button>
                                             </div>
                                         </form>
                                     </div>
-                                    <small class="text-muted" th:text="${picture.username}">Author</small>
+                                    <small class="text-muted" th:text="${picture.username}"></small>
                                 </div>
                             </div>
                         </div>
@@ -67,20 +71,16 @@
 
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                                th:text="#{msg.close}"></button>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
-
     </main>
 </div>
 </body>

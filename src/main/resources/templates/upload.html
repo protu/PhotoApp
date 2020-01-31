@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div th:replace="fragments :: header"></div>
     <main role="main">
-        <h3>New picture upload</h3>
+        <h3 th:text="#{msg.upload_title}"></h3>
         <hr/>
         <form method="POST" th:object="${picture}" enctype="multipart/form-data">
             <div class="form-row">
@@ -15,13 +15,13 @@
             </div>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <label th:for="${picture.name}">Name: </label>
+                    <label th:for="${picture.name}" th:text="#{msg.name} + ':'"> </label>
                     <input type="text" th:field="${picture.name}" class="form-control"/>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <label th:for="${picture.description}">Description: </label>
+                    <label th:for="${picture.description}" th:text="#{msg.description} + ':'"> </label>
                     <input type="text" th:field="${picture.description}" class="form-control"/>
                 </div>
             </div>
@@ -36,7 +36,6 @@
         <div th:if="${message}">
             <h2 th:text="${message}"/>
         </div>
-
 
 </body>
 </html>
