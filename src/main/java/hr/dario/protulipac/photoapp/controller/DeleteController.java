@@ -33,7 +33,9 @@ public class DeleteController {
 
     @PostMapping("/delete")
     public String editPicture(@RequestParam("id") long id, @RequestParam(value = "change", required = false) Integer change, Model model, Picture pictnew) {
-        pictureRepo.deleteById(id);
+        if (!pictureRepo.findById(id).isEmpty()) {
+            pictureRepo.deleteById(id);
+        }
         List<Picture> pictures = new ArrayList<>();
         pictureRepo.findAll().forEach(pictures::add);
         model.addAttribute("pictures", pictures);

@@ -28,7 +28,7 @@
                         <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                         <input type="hidden" name="id" th:value="${picture.id}"/>
                         <input type="hidden" name="change" value="1"/>
-                        <input type="submit" value="Edit picture" class="btn btn-primary"/>
+                        <input type="submit" th:value="#{msg.edit_picture}" class="btn btn-primary"/>
                     </div>
                 </div>
             </div>

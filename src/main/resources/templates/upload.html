@@ -28,7 +28,7 @@
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                    <input type="submit" value="Add picture" class="btn btn-primary"/>
+                    <input type="submit" th:value="#{msg.add_picture}" class="btn btn-primary"/>
                 </div>
             </div>
         </form>
