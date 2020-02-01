@@ -84,10 +84,4 @@ public class PhotoRestController {
         return pictureRepo.save(picture);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(consumes = {"application/json"})
-    public Picture addNew(@Valid @RequestBody Picture picture) {
-        picture.setUsername(SecurityUtils.getUsername());
-        return pictureRepo.save(picture);
-    }
 }
