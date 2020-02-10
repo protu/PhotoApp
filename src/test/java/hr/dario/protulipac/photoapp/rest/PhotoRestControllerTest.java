@@ -107,7 +107,7 @@ public class PhotoRestControllerTest {
         pictureMap.put("username", "admin");
         pictureMap.put("path", "/pict/pict001.jpg");
 
-        this.mockMvc.perform(put("/api/photo/10")
+        this.mockMvc.perform(put("/api/photo/1")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(pictureMap))
                 .with(csrf())

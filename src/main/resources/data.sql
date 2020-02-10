@@ -1,3 +1,7 @@
+delete pictures;
+delete authorities;
+delete users;
+
 insert into users (username, password, enabled)
 values ('admin', '$2y$12$7FdiTM6dXrnnRm9tjZaSpezpw5WncO.ZGSVMPQKOHLOs3hlWpBSrW', 1);
 insert into users (username, password, enabled)
