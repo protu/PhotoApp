@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @Entity
 @Table(name = "pictures")
-public class Picture {
+public class Picture implements PictureInt, Cloneable{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -23,4 +23,19 @@ public class Picture {
 
     @NotEmpty(message = "{validation.exercise.username.notEmpty}")
     private String username;
+
+    @Override
+    public String process() {
+        return "original";
+    }
+
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        }catch (CloneNotSupportedException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

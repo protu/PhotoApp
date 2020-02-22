@@ -9,20 +9,28 @@
         <hr/>
         <img th:src="${picture.path}" th:alt="${picture.name}"
              style="object-fit: cover; height: 400px; overflow: hidden">
-        <form method="POST" th:object="${picture}" enctype="multipart/form-data">
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <label th:for="${picture.name}" th:text="#{msg.name} +':'" ></label>
-                    <input type="text" th:field="${picture.name}" class="form-control"/>
+        <div th:unless="${message}">
+            <form method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label th:for="${picture.name}" th:text="#{msg.name} +':'"></label>
+                        <input type="text" th:field="${picture.name}" class="form-control"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <label th:for="${picture.description}" th:text="#{msg.description}+':'"> </label>
-                    <input type="text" th:field="${picture.description}" class="form-control"/>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label th:for="${picture.description}" th:text="#{msg.description}+':'"> </label>
+                        <input type="text" th:field="${picture.description}" class="form-control"/>
+                    </div>
                 </div>
-            </div>
-            <div th:unless="${message}">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <div th:each="action: ${actionNames}">
+                            <input type="checkbox" th:name="imageActions" th:value="${action}" />
+                            <label th:for="${#ids.next('actionNames')}" th:text="${action}"></label>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="col-md-4 mb-3">
                         <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
@@ -31,12 +39,13 @@
                         <input type="submit" th:value="#{msg.edit_picture}" class="btn btn-primary"/>
                     </div>
                 </div>
-            </div>
-            <div th:if="${message}">
-                <p th:text="${message}"></p>
-                <a class="btn btn-primary" href="/" th:text="#{msg.go_back}"></a>
-            </div>
         </form>
+        </div>
+        <div th:if="${message}">
+            <p><span th:text="${picture.name}"/> <br> <span th:text="${picture.description}"/></p>
+            <p th:text="${message}"></p>
+            <a class="btn btn-primary" th:href="@{/}" th:text="#{msg.go_back}"></a>
+        </div>
         <hr/>
     </main>
 </div>

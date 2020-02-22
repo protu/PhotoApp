@@ -16,7 +16,7 @@ public class SchedulerConfig {
     @Bean
     public SimpleTrigger exercisePrintTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(5).repeatForever();
+                .withIntervalInMinutes(5).repeatForever();
 
         return TriggerBuilder.newTrigger().forJob(exercisePrintJobDetail())
                 .withIdentity("exercisePrintTrigger").withSchedule(scheduleBuilder).build();
