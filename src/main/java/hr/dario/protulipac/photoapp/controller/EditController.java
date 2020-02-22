@@ -25,8 +25,6 @@ public class EditController {
 
     private PictureRepo pictureRepo;
 
-    private Actions<ImageAction> actions;
-
     @Autowired
     public EditController(PictureRepo pictureRepo) {
         this.pictureRepo = pictureRepo;
@@ -47,19 +45,7 @@ public class EditController {
         if (change != null && change == 1) {
             picture.setDescription(pictureNew.getDescription());
             picture.setName(pictureNew.getName());
-            PictureInt pictureClone = (Picture) picture.clone();
-            if (imageActions != null) {
-                for (String act : imageActions) {
-                    log.info("action selected: " + act);
-                    if (act.equals("blur")) {
-                        pictureClone = new BlurAction(pictureClone);
-                    } else if (act.equals("sharpen")) {
-                        pictureClone = new SharpenAction(pictureClone);
-                    } else if (act.equals("sepia")) {
-                        pictureClone = new SephiaAction(pictureClone);
-                    }
-                }
-            }
+            PictureInt pictureClone = new ImageProcessFactory(imageActions, picture).getNewPicture();
             pictureRepo.save(picture);
             model.addAttribute("message", "Picture " + picture.getName() + " is " + pictureClone.process());
             log.info("Picture " + picture.getName() + " is " + pictureClone.process());

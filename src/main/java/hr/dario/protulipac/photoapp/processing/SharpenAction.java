@@ -9,6 +9,7 @@ public class SharpenAction extends ImageAction {
 
     @Override
     public String process() {
-        return super.process() + " sharpen";
+        addAction("sharpen");
+        return super.process();
     }
 }
