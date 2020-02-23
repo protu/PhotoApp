@@ -14,9 +14,6 @@ import java.util.List;
 @Table(name = "pictures")
 public class Picture implements PictureInt, Cloneable{
 
-    @Transient
-    private List<String> actions = new ArrayList<>(Arrays.asList("original"));
-
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -34,20 +31,7 @@ public class Picture implements PictureInt, Cloneable{
 
     @Override
     public String process() {
-        StringBuilder sb = new StringBuilder();
-        Iterator acIt = actions.iterator();
-        while (acIt.hasNext()) {
-            sb.append((String)acIt.next());
-            if (acIt.hasNext()) {
-                sb.append(" and ");
-            }
-        }
-        return sb.toString();
-    }
-
-    @Override
-    public void addAction(String action) {
-        getActions().add(action);
+        return "original";
     }
 
     @Override

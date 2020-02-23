@@ -1,6 +1,8 @@
 package hr.dario.protulipac.photoapp.iterator;
 
 
+import java.util.NoSuchElementException;
+
 public class Actions<T> implements Container {
 
     private T[] actions;
@@ -16,19 +18,20 @@ public class Actions<T> implements Container {
 
     private class ActionIterator implements Iterator {
 
-        int index;
+        int index = -1;
 
         @Override
         public boolean hasNext() {
-            return index < actions.length;
+            return index < actions.length - 1;
         }
 
         @Override
         public Object next() {
             if (this.hasNext()) {
+                index++;
                 return actions[index];
             }
-            return null;
+            throw new NoSuchElementException();
         }
     }
 }

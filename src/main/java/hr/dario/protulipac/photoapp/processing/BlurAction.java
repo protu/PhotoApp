@@ -9,8 +9,7 @@ public  class BlurAction extends ImageAction {
 
     @Override
     public String process() {
-        addAction("blured");
-        return super.process();
+        return super.process() + " blured";
     }
 
 }

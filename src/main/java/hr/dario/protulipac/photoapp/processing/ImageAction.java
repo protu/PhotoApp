@@ -21,11 +21,6 @@ public abstract class ImageAction  implements PictureInt {
     }
 
     @Override
-    public void addAction(String action) {
-        pictureInt.addAction(action);
-    }
-
-    @Override
     public String process() {
         return pictureInt.process();
     }

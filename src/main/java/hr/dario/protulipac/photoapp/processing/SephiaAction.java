@@ -9,7 +9,6 @@ public class SephiaAction extends ImageAction {
 
     @Override
     public String process() {
-        addAction("sephia");
-        return super.process();
+        return super.process() + " sephia";
     }
 }

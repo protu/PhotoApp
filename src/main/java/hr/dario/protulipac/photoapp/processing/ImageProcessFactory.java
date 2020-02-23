@@ -2,12 +2,13 @@ package hr.dario.protulipac.photoapp.processing;
 
 import hr.dario.protulipac.photoapp.domain.Picture;
 import hr.dario.protulipac.photoapp.domain.PictureInt;
-
-import java.util.List;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class ImageProcessFactory {
     private String[] actions;
     private PictureInt picture;
+    private Logger log = LoggerFactory.getLogger(ImageProcessFactory.class);
 
     public ImageProcessFactory(String[] actions, Picture picture) {
         this.actions = actions;
@@ -29,6 +30,7 @@ public class ImageProcessFactory {
                 picture = new SephiaAction(picture);
             }
         }
+
         return picture;
     }
 }
