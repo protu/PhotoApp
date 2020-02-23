@@ -3,11 +3,11 @@ package hr.dario.protulipac.photoapp.processing;
 import hr.dario.protulipac.photoapp.domain.Picture;
 import hr.dario.protulipac.photoapp.domain.PictureInt;
 
-public abstract class ImageAction  implements PictureInt {
+public abstract class PhotoAction implements PictureInt {
 
     private PictureInt pictureInt;
 
-    public ImageAction(PictureInt pictureInt) {
+    public PhotoAction(PictureInt pictureInt) {
         this.pictureInt = pictureInt;
     }
 

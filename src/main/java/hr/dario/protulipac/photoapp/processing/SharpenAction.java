@@ -2,7 +2,7 @@ package hr.dario.protulipac.photoapp.processing;
 
 import hr.dario.protulipac.photoapp.domain.PictureInt;
 
-public class SharpenAction extends ImageAction {
+public class SharpenAction extends PhotoAction {
     public SharpenAction(PictureInt pictureInt) {
         super(pictureInt);
     }

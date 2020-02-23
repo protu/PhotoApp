@@ -2,9 +2,9 @@ package hr.dario.protulipac.photoapp.controller;
 
 import hr.dario.protulipac.photoapp.domain.Picture;
 import hr.dario.protulipac.photoapp.domain.PictureInt;
-import hr.dario.protulipac.photoapp.iterator.Actions;
 import hr.dario.protulipac.photoapp.processing.*;
 import hr.dario.protulipac.photoapp.repository.PictureRepo;
+import hr.dario.protulipac.photoapp.service.ActionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 public class EditController {
@@ -24,10 +22,12 @@ public class EditController {
     private Logger log = LoggerFactory.getLogger(EditController.class);
 
     private PictureRepo pictureRepo;
+    private ActionService actionService;
 
     @Autowired
-    public EditController(PictureRepo pictureRepo) {
+    public EditController(PictureRepo pictureRepo, ActionService actionService) {
         this.pictureRepo = pictureRepo;
+        this.actionService = actionService;
     }
 
     @GetMapping("/edit")
@@ -45,13 +45,12 @@ public class EditController {
         if (change != null && change == 1) {
             picture.setDescription(pictureNew.getDescription());
             picture.setName(pictureNew.getName());
-            PictureInt pictureClone = new ImageProcessFactory(imageActions, picture).getNewPicture();
+            PictureInt pictureClone = new PhotoProcessFactory(imageActions, picture).getProcessedPicture();
             pictureRepo.save(picture);
             model.addAttribute("message", "Picture " + picture.getName() + " is " + pictureClone.process());
             log.info("Picture " + picture.getName() + " is " + pictureClone.process());
         } else {
-            List<String> actionNames = new ArrayList<>(Arrays.asList("blur", "sepia", "sharpen"));
-            model.addAttribute("actionNames", actionNames);
+            model.addAttribute("actionNames", actionService.getActionList());
         }
         return ("edit");
     }

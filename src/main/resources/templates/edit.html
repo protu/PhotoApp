@@ -27,7 +27,7 @@
                     <div class="col-md-4 mb-3">
                         <div th:each="action: ${actionNames}">
                             <input type="checkbox" th:name="imageActions" th:value="${action}" />
-                            <label th:for="${#ids.next('actionNames')}" th:text="${action}"></label>
+                            <label th:for="${#ids.next('actionNames')}" th:text="${#strings.toLowerCase(action)}"></label>
                         </div>
                     </div>
                 </div>

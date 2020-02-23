@@ -2,8 +2,8 @@ package hr.dario.protulipac.photoapp.processing;
 
 import hr.dario.protulipac.photoapp.domain.PictureInt;
 
-public class SephiaAction extends ImageAction {
-    public SephiaAction(PictureInt pictureInt) {
+public class SepiaAction extends PhotoAction {
+    public SepiaAction(PictureInt pictureInt) {
         super(pictureInt);
     }
 

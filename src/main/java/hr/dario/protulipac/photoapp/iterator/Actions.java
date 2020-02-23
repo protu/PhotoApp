@@ -11,6 +11,10 @@ public class Actions<T> implements Container {
         this.actions = actions;
     }
 
+    public int length() {
+        return actions.length;
+    }
+
     @Override
     public Iterator getIterator() {
         return new ActionIterator();
