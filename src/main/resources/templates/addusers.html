@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments :: header"></div>
+    <main role="main">
+        <div th:if="${message}">
+            <p th:text="${message}"></p>
+        </div>
+
+        <div class="container">
+            <h3 th:text="#{msg.add_user}"></h3>
+            <form method="POST" th:action="@{/users}">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label th:text="#{msg.name} +':'"></label>
+                        <input type="text" th:field="${user.username}"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label th:text="#{msg.password}+':'"> </label>
+                        <input type="password" th:field="${user.password}"/>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label th:text="#{msg.enabled}+':'"> </label>
+                    <input type="checkbox" name="enabled" th:checked="${user.enabled}"/>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <select th:field="${user.authority}">
+                        <option th:value="ROLE_USER">ROLE_USER</option>
+                        <option th:value="ROLE_ADMIN">ROLE_ADMIN</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                        <input type="submit" th:value="#{msg.add_user}" class="btn btn-primary"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+</body>
+</html>

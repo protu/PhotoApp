@@ -6,10 +6,10 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table
+@Table(name = "users")
 @SecondaryTables({@SecondaryTable(name = "authorities")
 })
-public class Users {
+public class User {
 
 
     @Id
