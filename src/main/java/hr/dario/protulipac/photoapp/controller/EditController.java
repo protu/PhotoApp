@@ -5,6 +5,7 @@ import hr.dario.protulipac.photoapp.domain.PictureInt;
 import hr.dario.protulipac.photoapp.processing.*;
 import hr.dario.protulipac.photoapp.repository.PictureRepo;
 import hr.dario.protulipac.photoapp.service.ActionService;
+import hr.dario.protulipac.photoapp.service.CloneStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class EditController {
@@ -23,11 +25,13 @@ public class EditController {
 
     private PictureRepo pictureRepo;
     private ActionService actionService;
+    private CloneStore cloneStore;
 
     @Autowired
-    public EditController(PictureRepo pictureRepo, ActionService actionService) {
+    public EditController(PictureRepo pictureRepo, ActionService actionService, CloneStore cloneStore) {
         this.pictureRepo = pictureRepo;
         this.actionService = actionService;
+        this.cloneStore = cloneStore;
     }
 
     @GetMapping("/edit")
@@ -47,8 +51,13 @@ public class EditController {
             picture.setName(pictureNew.getName());
             PictureInt pictureClone = new PhotoProcessFactory(imageActions, picture).getProcessedPicture();
             pictureRepo.save(picture);
+            cloneStore.putClone(picture.getId(), pictureClone);
             model.addAttribute("message", "Picture " + picture.getName() + " is " + pictureClone.process());
             log.info("Picture " + picture.getName() + " is " + pictureClone.process());
+            List<PictureInt> clones = cloneStore.getClones(picture.getId());
+            for (PictureInt pictureInt : clones) {
+                log.info(pictureInt.process());
+            }
         } else {
             model.addAttribute("actionNames", actionService.getActionList());
         }
