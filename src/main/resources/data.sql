@@ -10,8 +10,6 @@ values ('luser', '$2y$12$jSMWmnPBVkssQ5Z2GEs/b.0VhyIllxlpA6UNMtqIDEno.8BYy14Cy',
 insert into authorities (username, authority)
 values ('admin', 'ROLE_ADMIN');
 insert into authorities (username, authority)
-values ('admin', 'ROLE_USER');
-insert into authorities (username, authority)
 values ('luser', 'ROLE_USER');
 
 insert into pictures (name, path, description, username)

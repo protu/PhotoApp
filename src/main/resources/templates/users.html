@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments :: header"></div>
+    <main role="main">
+        <div th:if="${message}">
+            <p th:text="${message}"></p>
+        </div>
+
+
+        <div class="container">
+            <h3 th:text="#{msg.user_list}">User list</h3>
+            <table class="table">
+                <tr class="d-flex"><th class="col">Username</th><th class="col" >Authority</th><th class="col">Enabled</th></tr>
+                <div th:each="user: ${users}">
+                    <tr class="d-flex">
+                        <td class="col" th:text="${user.username}"></td>
+                        <td class="col" th:text="${user.authority}"></td>
+                        <td class="col" th:text="${user.enabled}"></td>
+                    </tr>
+                </div>
+            </table>
+            <a class="btn btn-primary" href="/adduser" th:text="#{msg.add_user}"></a>
+        </div>
+    </main>
+</div>
+</body>
+</html>

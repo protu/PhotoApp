@@ -32,6 +32,9 @@
                     <input type="submit" th:value="#{msg.logout}" class="btn border ml-2"/>
                 </form>
             </div>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="/users" th:text="#{msg.user_management}"></a>
+            </div>
             <div>
                 <span th:text="#{msg.lang_current}"></span>:
                 <select id="locales">
