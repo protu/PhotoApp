@@ -34,7 +34,9 @@
                                         <form action="/edit" method="post">
                                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                                             <input type="hidden" name="id" th:value="${picture.id}"/>
-                                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                            <!--                                            <div sec:authorize="hasRole('ROLE_ADMIN')">-->
+                                            <div th:if="${#authentication.name} == ${picture.username} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+
                                                 <button type="submit" class="btn btn-sm btn-outline-secondary"
                                                         th:text="#{msg.edit}">
                                                 </button>
@@ -43,7 +45,8 @@
                                         <form action="/delete" method="post">
                                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                                             <input type="hidden" name="id" th:value="${picture.id}"/>
-                                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                            <!--                                            <div sec:authorize="hasRole('ROLE_ADMIN')">-->
+                                            <div th:if="${#authentication.name} == ${picture.username} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                                                 <button type="submit" class="btn btn-sm btn-outline-secondary"
                                                         th:text="#{msg.delete}">
                                                 </button>
