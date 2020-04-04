@@ -20,8 +20,7 @@ public class CloneStore {
             List<PictureInt> cl = new ArrayList<>();
             cl.add(cloneInt);
             clones.put(id, cl);
-        }
-        else {
+        } else {
             clones.get(id).add(cloneInt);
         }
     }
