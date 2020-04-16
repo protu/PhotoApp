@@ -79,7 +79,7 @@ public class PhotoRestController {
     @PostMapping(value = "/new", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Picture addNeWWithDesc(@RequestParam(value = "file") MultipartFile file, @Valid @RequestPart(value = "picture") Picture picture) throws IOException {
         picture.setUsername(SecurityUtils.getUsername());
-        picture.setPath(File.separator + "pict" + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
+        picture.setPath("pict" + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
         fileService.uploadFile(file);
         return pictureRepo.save(picture);
     }
