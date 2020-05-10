@@ -28,6 +28,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
+        System.out.println("Hello Home page");
         List<Picture> pictures = new ArrayList<>();
         pictureRepo.findAll().forEach(pictures::add);
         model.addAttribute("pictures", pictures);
