@@ -9,6 +9,7 @@ import hr.dario.protulipac.photoapp.service.CloneStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +27,14 @@ public class EditController {
     private PictureRepo pictureRepo;
     private ActionService actionService;
     private CloneStore cloneStore;
+    private final JmsTemplate jmsTemplate;
 
     @Autowired
-    public EditController(PictureRepo pictureRepo, ActionService actionService, CloneStore cloneStore) {
+    public EditController(PictureRepo pictureRepo, ActionService actionService, CloneStore cloneStore, JmsTemplate jmsTemplate) {
         this.pictureRepo = pictureRepo;
         this.actionService = actionService;
         this.cloneStore = cloneStore;
+        this.jmsTemplate = jmsTemplate;
     }
 
     @GetMapping("/edit")

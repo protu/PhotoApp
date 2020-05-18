@@ -6,6 +6,7 @@ import hr.dario.protulipac.photoapp.service.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -27,10 +28,13 @@ public class FileController {
 
     private final FileService fileService;
     private final PictureRepo pictureRepo;
+    private final JmsTemplate jmsTemplate;
+
     @Autowired
-    public FileController(FileService fileService, PictureRepo pictureRepo) {
+    public FileController(FileService fileService, PictureRepo pictureRepo, JmsTemplate jmsTemplate) {
         this.fileService = fileService;
         this.pictureRepo = pictureRepo;
+        this.jmsTemplate = jmsTemplate;
     }
 
     @GetMapping("/upload")

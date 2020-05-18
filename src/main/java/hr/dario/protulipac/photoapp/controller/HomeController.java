@@ -6,6 +6,7 @@ import hr.dario.protulipac.photoapp.repository.PictureRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +20,14 @@ import java.util.List;
 public class HomeController {
 
     private final PictureRepo pictureRepo;
+    private final JmsTemplate jmsTemplate;
+
     private Logger log = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
-    public HomeController(PictureRepo pictureRepo) {
+    public HomeController(PictureRepo pictureRepo, JmsTemplate jmsTemplate) {
         this.pictureRepo = pictureRepo;
+        this.jmsTemplate = jmsTemplate;
     }
 
     @GetMapping("/")
