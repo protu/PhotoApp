@@ -28,6 +28,8 @@ public class PhotoRestController {
 
     private final PictureRepo pictureRepo;
     private final FileService fileService;
+//    private String username = SecurityUtils.getUsername();
+    private String username = "admin";
 
     @Autowired
     public PhotoRestController(FileService fileService, PictureRepo pictureRepo) {
@@ -37,12 +39,11 @@ public class PhotoRestController {
 
     @GetMapping
     public Iterable<Picture> findAll() {
-        return SecurityUtils.isAdmin() ? pictureRepo.findAll() : pictureRepo.findAllByUsername(SecurityUtils.getUsername());
+        return SecurityUtils.isAdmin() ? pictureRepo.findAll() : pictureRepo.findAllByUsername(username);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Picture> findPict(@PathVariable Long id) {
-        String username = SecurityUtils.getUsername();
         Optional<Picture> pictureOptional = pictureRepo.findByIdAndUsername(id, username);
         return pictureOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -50,7 +51,7 @@ public class PhotoRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) throws HttpClientErrorException.NotFound {
-        boolean exists = SecurityUtils.isAdmin() ? pictureRepo.existsById(id) : pictureRepo.existsByIdAndUsername(id, SecurityUtils.getUsername());
+        boolean exists = SecurityUtils.isAdmin() ? pictureRepo.existsById(id) : pictureRepo.existsByIdAndUsername(id, username);
         if (exists) {
             pictureRepo.deleteById(id);
         }
@@ -61,13 +62,13 @@ public class PhotoRestController {
 
     @PutMapping(value = "/{id}", consumes = "application/json")
     public ResponseEntity<Picture> update(@PathVariable Long id, @Valid @RequestBody Picture updtPicture) {
-        Optional<Picture> picture = SecurityUtils.isAdmin() ? pictureRepo.findById(id) : pictureRepo.findByIdAndUsername(id, SecurityUtils.getUsername());
+        Optional<Picture> picture = SecurityUtils.isAdmin() ? pictureRepo.findById(id) : pictureRepo.findByIdAndUsername(id, username);
 
         picture.ifPresent(value -> {
             value.setName(updtPicture.getName());
             value.setDescription(updtPicture.getDescription());
             value.setPath(updtPicture.getPath());
-            value.setUsername(SecurityUtils.getUsername());
+            value.setUsername(username);
 
             pictureRepo.save(value);
         });
@@ -78,7 +79,7 @@ public class PhotoRestController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/new", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Picture addNeWWithDesc(@RequestParam(value = "file") MultipartFile file, @Valid @RequestPart(value = "picture") Picture picture) throws IOException {
-        picture.setUsername(SecurityUtils.getUsername());
+        picture.setUsername(username);
         picture.setPath("pict" + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
         fileService.uploadFile(file);
         return pictureRepo.save(picture);
