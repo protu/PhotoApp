@@ -49,6 +49,7 @@ public class EditController {
                               Model model, Picture pictureNew, ArrayList<String> actNames) {
         Picture picture = pictureRepo.findById(id).get();
         model.addAttribute("picture", picture);
+        jmsTemplate.convertAndSend("Photo " + picture.getName() + " is in edit mode");
         if (change != null && change == 1) {
             picture.setDescription(pictureNew.getDescription());
             picture.setName(pictureNew.getName());
@@ -57,6 +58,7 @@ public class EditController {
             cloneStore.putClone(picture.getId(), pictureClone);
             model.addAttribute("message", "Picture " + picture.getName() + " is " + pictureClone.process());
             log.info("Picture " + picture.getName() + " is " + pictureClone.process());
+            jmsTemplate.convertAndSend("Photo " + picture.getName() + " edited");
             List<PictureInt> clones = cloneStore.getClones(picture.getId());
             for (PictureInt pictureInt : clones) {
                 log.info("Proto:" + pictureInt.process());

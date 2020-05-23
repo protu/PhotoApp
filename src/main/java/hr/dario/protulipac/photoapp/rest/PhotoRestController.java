@@ -5,10 +5,10 @@ import hr.dario.protulipac.photoapp.repository.PictureRepo;
 import hr.dario.protulipac.photoapp.security.SecurityUtils;
 import hr.dario.protulipac.photoapp.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -30,21 +30,25 @@ public class PhotoRestController {
     private final FileService fileService;
 //    private String username = SecurityUtils.getUsername();
     private String username = "admin";
+    private final JmsTemplate jmsTemplate;
 
     @Autowired
-    public PhotoRestController(FileService fileService, PictureRepo pictureRepo) {
+    public PhotoRestController(FileService fileService, PictureRepo pictureRepo, JmsTemplate jmsTemplate) {
         this.pictureRepo = pictureRepo;
         this.fileService = fileService;
+        this.jmsTemplate = jmsTemplate;
     }
 
     @GetMapping
     public Iterable<Picture> findAll() {
+        jmsTemplate.convertAndSend("REST: GET all photos");
         return SecurityUtils.isAdmin() ? pictureRepo.findAll() : pictureRepo.findAllByUsername(username);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Picture> findPict(@PathVariable Long id) {
         Optional<Picture> pictureOptional = pictureRepo.findByIdAndUsername(id, username);
+        jmsTemplate.convertAndSend("REST: GET photo with id: " + id);
         return pictureOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -53,6 +57,7 @@ public class PhotoRestController {
     public void delete(@PathVariable Long id) throws HttpClientErrorException.NotFound {
         boolean exists = SecurityUtils.isAdmin() ? pictureRepo.existsById(id) : pictureRepo.existsByIdAndUsername(id, username);
         if (exists) {
+            jmsTemplate.convertAndSend("REST: DELETE photo with id: " + id);
             pictureRepo.deleteById(id);
         }
         else {
@@ -72,7 +77,7 @@ public class PhotoRestController {
 
             pictureRepo.save(value);
         });
-
+        jmsTemplate.convertAndSend("REST: PUT photo with id: " + id);
         return picture.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -82,6 +87,7 @@ public class PhotoRestController {
         picture.setUsername(username);
         picture.setPath("pict" + File.separator + StringUtils.cleanPath(file.getOriginalFilename()));
         fileService.uploadFile(file);
+        jmsTemplate.convertAndSend("REST: POST new picture: " + picture.getName());
         return pictureRepo.save(picture);
     }
 

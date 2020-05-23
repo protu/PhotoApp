@@ -55,6 +55,7 @@ public class FileController {
         List<Picture> pictures = new ArrayList<>();
         pictureRepo.findAll().forEach(pictures::add);
         model.addAttribute("pictures", pictures);
+        jmsTemplate.convertAndSend("Photo " + picture.getName() + " uploaded");
         return "home";
     }
 }

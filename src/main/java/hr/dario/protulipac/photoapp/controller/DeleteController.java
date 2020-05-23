@@ -37,7 +37,9 @@ public class DeleteController {
     @PostMapping("/delete")
     public String editPicture(@RequestParam("id") long id, @RequestParam(value = "change", required = false) Integer change, Model model, Picture pictnew) {
         if (!pictureRepo.findById(id).isEmpty()) {
+            String pictureName = pictureRepo.findById(id).get().getName();
             pictureRepo.deleteById(id);
+            jmsTemplate.convertAndSend("Photo " + pictureName + " deleted");
         }
         List<Picture> pictures = new ArrayList<>();
         pictureRepo.findAll().forEach(pictures::add);
