@@ -93,7 +93,7 @@ public class PhotoRestControllerTest {
 
     @Test
     public void deletePicture() throws Exception {
-        this.mockMvc.perform(delete("/api/photo/1")
+        this.mockMvc.perform(delete("/api/photo/8")
                 .with(csrf())
                 .with(user("admin").password("admin").roles("USER", "ADMIN"))
         ).andExpect(status().isNoContent());
