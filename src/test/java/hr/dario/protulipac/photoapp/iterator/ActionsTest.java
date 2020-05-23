@@ -1,12 +1,8 @@
 package hr.dario.protulipac.photoapp.iterator;
-
 import org.junit.jupiter.api.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActionsTest {
-
-
 
     @Test
     void hasNext() {

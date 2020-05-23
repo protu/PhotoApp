@@ -28,7 +28,7 @@ class EditControllerTest {
     @Test
     public void editor() throws Exception {
         this.mockMvc.perform(post("/edit")
-                .param("id", "2")
+                .param("id", "1")
                 .with(csrf())
                 .with(user("admin").password("admin").roles("USER", "ADMIN"))
         )
@@ -42,7 +42,7 @@ class EditControllerTest {
                 .param("name", "Train")
                 .param("description", "Train is coming")
                 .with(csrf())
-                .param("id", "2")
+                .param("id", "1")
                 .param("change", "1")
                 .with(user("admin").password("admin").roles("USER", "ADMIN"))
         )
