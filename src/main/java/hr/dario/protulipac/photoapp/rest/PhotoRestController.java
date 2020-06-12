@@ -44,7 +44,7 @@ public class PhotoRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Picture> findPict(@PathVariable Long id) {
-        Optional<Picture> pictureOptional = pictureRepo.findByIdAndUsername(id, username);
+        Optional<Picture> pictureOptional = pictureRepo.findById(id);
         return pictureOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
