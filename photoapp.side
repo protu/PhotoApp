@@ -1,0 +1,203 @@
+{
+  "id": "6352e12f-d4cc-43d3-9836-98118359e23d",
+  "version": "2.0",
+  "name": "photoapp",
+  "url": "http://localhost:8080",
+  "tests": [{
+    "id": "35bf7bd7-6325-4505-af09-1352416d8051",
+    "name": "edit picture",
+    "commands": [{
+      "id": "35a0ddb2-e01b-4582-8b7c-ed37908fead3",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "96bc7126-4676-4edb-80c6-4e303a35031c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1283x672",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d1719e22-f318-400f-a59e-0e3f0db8f882",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cb7e3565-1a4e-411f-84c9-041119d93c04",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-md-4:nth-child(2) form:nth-child(2) .btn",
+      "targets": [
+        ["css=.col-md-4:nth-child(2) form:nth-child(2) .btn", "css:finder"],
+        ["xpath=(//button[@type='submit'])[3]", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/div/div/form/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6e6ddf2b-fa20-4553-8823-3dab6f1dbaa7",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "383c339c-ad7c-4a8d-abd6-a82d2d9c1382",
+      "comment": "",
+      "command": "type",
+      "target": "id=description",
+      "targets": [
+        ["id=description", "id"],
+        ["name=description", "name"],
+        ["css=#description", "css:finder"],
+        ["xpath=//input[@id='description']", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "POTS main frame"
+    }, {
+      "id": "9dd41bfc-4134-418d-baba-65d9a0280ea5",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(3) > input",
+      "targets": [
+        ["css=div:nth-child(3) > input", "css:finder"],
+        ["xpath=(//input[@name='imageActions'])[3]", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7df27bfe-edca-4180-843b-01e6069192ef",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//input[@value='Edit picture']", "xpath:attributes"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "18975ed7-94dd-4277-8d70-a7d759b254c2",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Go back",
+      "targets": [
+        ["linkText=Go back", "linkText"],
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//a[contains(text(),'Go back')]", "xpath:link"],
+        ["xpath=(//a[contains(@href, '/')])[3]", "xpath:href"],
+        ["xpath=//main/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Go back')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "23004d60-918e-4345-825a-ac3412aa11a8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-md-4:nth-child(2) .btn-group > .btn",
+      "targets": [
+        ["css=.col-md-4:nth-child(2) .btn-group > .btn", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[2]/div/div/div/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a66f139a-7029-41c3-a467-fc1c3849bda9",
+      "comment": "",
+      "command": "click",
+      "target": "css=#Modal2 .close",
+      "targets": [
+        ["css=#Modal2 .close", "css:finder"],
+        ["xpath=(//button[@type='button'])[5]", "xpath:attributes"],
+        ["xpath=//div[@id='Modal2']/div/div/div/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d292c831-8bcb-4592-9db4-feb39b19e19e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.border",
+      "targets": [
+        ["css=.border", "css:finder"],
+        ["xpath=//input[@value='Logout']", "xpath:attributes"],
+        ["xpath=//div[@id='logo-title']/div/div[3]/div/form/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "102cb1fe-fc1b-49a3-a608-209dc244d4d1",
+    "name": "delete picture",
+    "commands": [{
+      "id": "7ba4e2cb-d30d-4a00-8659-ca3a5921f40f",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cb7f23c9-38ec-4e4a-93f4-26391a0bb9d4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1288x676",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fde6634c-8502-44d2-a1ec-eab1059831ec",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "17e01b75-afa7-4ef6-ad8f-bb2b2fcbfab5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-md-4:nth-child(4) form:nth-child(3) .btn",
+      "targets": [
+        ["css=.col-md-4:nth-child(4) form:nth-child(3) .btn", "css:finder"],
+        ["xpath=(//button[@type='submit'])[8]", "xpath:attributes"],
+        ["xpath=//div[4]/div/div/div/div/form[2]/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f21d39df-a321-42cb-a588-fe3f23a6119c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.border",
+      "targets": [
+        ["css=.border", "css:finder"],
+        ["xpath=//input[@value='Logout']", "xpath:attributes"],
+        ["xpath=//div[@id='logo-title']/div/div[3]/div/form/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "a180f264-2401-443e-9298-9eb589c3e119",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:8080/"],
+  "plugins": []
+}
