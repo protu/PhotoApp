@@ -55,9 +55,7 @@ public class EditController {
             model.addAttribute("message", "Picture " + picture.getName() + " is " + pictureClone.process());
             log.info("Picture " + picture.getName() + " is " + pictureClone.process());
             List<PictureInt> clones = cloneStore.getClones(picture.getId());
-            for (PictureInt pictureInt : clones) {
-                log.info("Proto:" + pictureInt.process());
-            }
+            clones.forEach(c -> log.info("Proto: " + c.process()));
         } else {
             model.addAttribute("actionNames", actionService.getActionList());
         }
