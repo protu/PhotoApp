@@ -5,6 +5,8 @@ import hr.dario.protulipac.photoapp.domain.Picture;
 import hr.dario.protulipac.photoapp.repository.PictureRepo;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +33,18 @@ public class HomeController {
         this.meterRegistry = meterRegistry;
     }
 
+    @Autowired
+    private Timer findAllPicturesTimer;
+
     @GetMapping("/")
+    @SneakyThrows
     public String home(Model model) {
         if (homeHitCounter == null) {
             initCounters();
         }
         System.out.println("Hello Home page");
         List<Picture> pictures = new ArrayList<>();
-        pictureRepo.findAll().forEach(pictures::add);
+        findAllPicturesTimer.recordCallable(() -> pictureRepo.findAll()).forEach(pictures::add);
         model.addAttribute("pictures", pictures);
         homeHitCounter.increment(1);
         return ("home");
